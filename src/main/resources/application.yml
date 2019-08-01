@@ -1,0 +1,8 @@
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    schema: classpath:db/schema-sqlite.sql
+#    data: classpath:db/data-h2.sql
+    url: jdbc:sqlite:data.db
