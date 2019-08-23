@@ -3,6 +3,18 @@
 spring:
   datasource:
     driver-class-name: org.sqlite.JDBC
-    schema: classpath:db/schema-sqlite.sql
+#    schema: classpath:db/schema-sqlite.sql
 #    data: classpath:db/data-h2.sql
     url: jdbc:sqlite:data.db
+#    initialization-mode: always #springboot2开启
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+javafx:
+  title: 学习者资料管理器
+  appicons:
+    - /icons/xuewei_16.png
+    - /icons/xuewei_24.png
+    - /icons/xuewei_36.png
+    - /icons/xuewei_42.png
+    - /icons/xuewei_64.png

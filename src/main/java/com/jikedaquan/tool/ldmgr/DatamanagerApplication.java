@@ -2,6 +2,7 @@ package com.jikedaquan.tool.ldmgr;
 
 import com.jikedaquan.tool.ldmgr.view.MainStageView;
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication

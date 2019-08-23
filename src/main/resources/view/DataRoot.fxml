@@ -4,40 +4,82 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane stylesheets="@/css/DataRoot.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jikedaquan.tool.ldmgr.controller.DataRootController">
     <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
-    <AnchorPane prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <children>
-         <TextField AnchorPane.leftAnchor="0.0" />
-         <Button mnemonicParsing="false" styleClass="btn,btn-success" text="一个按钮" AnchorPane.leftAnchor="0.0" />
-         <ToggleButton mnemonicParsing="false" text="ToggleButton" AnchorPane.leftAnchor="300.0"/>
-         <ComboBox prefWidth="150.0" AnchorPane.leftAnchor="190.0" />
-         <CheckBox mnemonicParsing="false" text="CheckBox" />
-         <CheckBox mnemonicParsing="false" text="CheckBox" />
-         <CheckBox mnemonicParsing="false" text="CheckBox" />
-         <Button mnemonicParsing="false" styleClass="btn,btn-success" text="Button" />
-      </children>
-    </AnchorPane>
-   <AnchorPane layoutY="205.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-      <children>
-          <TableView minWidth="-Infinity" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-          </TableView>
-          <Pagination currentPageIndex="1" maxPageIndicatorCount="5" pageCount="21" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <AnchorPane prefHeight="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+            <TextField fx:id="txtDataName" prefHeight="25.0" prefWidth="160.0" promptText="输入要搜寻的名称" AnchorPane.leftAnchor="0.0" />
+            <Label layoutX="180.0" prefHeight="25" prefWidth="36.0" text="类别：" AnchorPane.leftAnchor="180.0" />
 
-    </Pagination>
-      </children>
-   </AnchorPane>
+            <ComboBox fx:id="comboBoxDataType" layoutX="220.0" prefHeight="25.0" prefWidth="150.0" promptText="不限" AnchorPane.leftAnchor="220.0" />
+            <Label layoutX="385.0" prefHeight="25" prefWidth="60.0" text="文件类型：" AnchorPane.leftAnchor="385.0" />
+            <CheckBox fx:id="cbIsDir" layoutX="445.0" mnemonicParsing="false" prefHeight="25" text="文件夹" AnchorPane.leftAnchor="445.0" />
+
+            <CheckBox fx:id="cbIsAudio" layoutX="520.0" mnemonicParsing="false" prefHeight="25" prefWidth="78.0" text="音频" AnchorPane.leftAnchor="520.0" />
+            <CheckBox fx:id="cbIsVideo" layoutX="585.0" mnemonicParsing="false" prefHeight="25" prefWidth="78.0" text="视频" AnchorPane.leftAnchor="585.0" />
+            <CheckBox fx:id="cbIsDoc" layoutX="650.0" mnemonicParsing="false" prefHeight="25" text="文档" AnchorPane.leftAnchor="650.0" />
+            <Button layoutX="730.0" mnemonicParsing="false" onMouseClicked="#search" prefHeight="25.0" prefWidth="55.0" text="搜寻" AnchorPane.leftAnchor="730.0" />
+        </children>
+    </AnchorPane>
+    <AnchorPane layoutY="205.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+        <children>
+            <TableView fx:id="tableView" minWidth="-Infinity" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+                <columns>
+                    <TableColumn fx:id="column_checkBox" prefWidth="35.0" sortable="false">
+                        <graphic>
+                            <CheckBox fx:id="column_checkBox_cell" mnemonicParsing="false" onMouseClicked="#selectAllRow" />
+                        </graphic>
+                    </TableColumn>
+                    <TableColumn fx:id="dataId" prefWidth="55.0" text="序号">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="dataId" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="dataName" prefWidth="200.0" text="名字">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="dataName" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="dataSize" prefWidth="75.0" text="大小(MB)">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="dataSize" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="dataType" prefWidth="75.0" text="类型">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="dataType" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="dataPosition" prefWidth="260.0" text="位置">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="dataPosition" />
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            <contextMenu>
+               <ContextMenu>
+                 <items>
+                   <MenuItem mnemonicParsing="false" text="敬请期待" />
+                 </items>
+               </ContextMenu>
+            </contextMenu>
+            </TableView>
+            <Pagination fx:id="pagination" currentPageIndex="1" maxPageIndicatorCount="5" pageCount="21" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+
+            </Pagination>
+        </children>
+    </AnchorPane>
 </AnchorPane>

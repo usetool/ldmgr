@@ -1,4 +1,39 @@
-#mainBorderPane {
-    -fx-pref-height: 400.0;
-    -fx-pref-width: 600.0;
+#leftnav {
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: gray;
+    -fx-border-style: solid;
+    -fx-pref-width: 170;
+}
+
+#leftnav .hyperlink:hover {
+    -fx-background-color: rgb(222, 222, 222);
+}
+
+#leftnav .hyperlink:visited {
+    -fx-border-width: 0 0 0 5;
+    -fx-border-color: rgb(51, 112, 183);
+    -fx-border-style: solid;
+    -fx-background-color: rgb(222, 222, 222);
+}
+#leftnav .hyperlink {
+    -fx-border-width: 0 0 0 5;
+    -fx-border-color: transparent;
+    -fx-pref-width: 170;
+    -fx-pref-height: 30;
+    -fx-padding: 0 0 0 45;
+    -fx-background-size: 16;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 20;
+    /*-fx-background-image: url(/icons/kucun_16.png);*/
+
+}
+
+#dataGridPane{
+    -fx-border-width: 1 0;
+    -fx-border-style: solid;
+    -fx-border-color: gray;
+    -fx-pref-width: 170;
+ }
+#content {
+
 }
