@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,19 @@ public class MyDataServiceImpl implements MyDataService {
     @Override
     public void selectMyDataPage(Page<MyData> myDataPage, QueryMyData queryMyData) {
         //获取查询参数
+        QueryWrapper<MyData> queryWrapper = getMyDataQueryWrapper(queryMyData);
+
+
+        queryWrapper.orderByDesc("data_create_time");
+        myDataMapper.selectPage(myDataPage, queryWrapper);
+    }
+
+    /**
+     * 将自定义的查询参数转为 mapper所需的查询参数
+     * @param queryMyData
+     * @return
+     */
+    private QueryWrapper<MyData> getMyDataQueryWrapper(QueryMyData queryMyData) {
         Integer dataId = queryMyData.getDataId();
         String dataName = queryMyData.getDataName();
         Integer dataParent = queryMyData.getDataParent();
@@ -58,9 +72,19 @@ public class MyDataServiceImpl implements MyDataService {
                 return myDataQueryOrWrapper;
             });
         }
+        return queryWrapper;
+    }
 
+    @Override
+    public int selectCount(QueryMyData queryMyData) {
+        Integer count = myDataMapper.selectCount(getMyDataQueryWrapper(queryMyData));
+        return count;
+    }
 
-        queryWrapper.orderByDesc("data_create_time");
-        myDataMapper.selectPage(myDataPage, queryWrapper);
+    @Override
+    public int selectCountByFileType(String fileType) {
+        QueryMyData queryMyData = new QueryMyData();
+        queryMyData.setDataFileType(Arrays.asList(fileType));
+        return selectCount(queryMyData);
     }
 }

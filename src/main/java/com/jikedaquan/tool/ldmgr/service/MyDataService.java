@@ -6,4 +6,8 @@ import com.jikedaquan.tool.ldmgr.query.QueryMyData;
 
 public interface MyDataService {
     void selectMyDataPage(Page<MyData> myDataPage, QueryMyData queryMyData);
+
+    int selectCount(QueryMyData queryMyData);
+
+    int selectCountByFileType(String fileType);
 }
