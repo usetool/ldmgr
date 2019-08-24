@@ -1,10 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TreeItem?>
 <AnchorPane stylesheets="@/css/FileManager.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jikedaquan.tool.ldmgr.controller.FileManagerController">
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.jikedaquan.tool.ldmgr.controller.FileManagerController">
+    <children>
+        <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <!--<ListView fx:id="lvDisk" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">-->
+
+                        <!--<contextMenu>-->
+                        <!--<ContextMenu fx:id="cmDisk">-->
+                        <!--<items>-->
+                        <!--<MenuItem mnemonicParsing="false" text="Unspecified Action" />-->
+                        <!--</items>-->
+                        <!--</ContextMenu>-->
+                        <!--</contextMenu>-->
+                        <!--</ListView>-->
+
+                        <TreeView fx:id="tvDisk" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <root>
+                                <TreeItem fx:id="rootTreeItem"/>
+                            </root>
+                            <contextMenu>
+                                <ContextMenu fx:id="cmDisk">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Unspecified Action"/>
+                                    </items>
+                                </ContextMenu>
+                            </contextMenu>
+                        </TreeView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane>
+                    <children>
+                        <TableView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <placeholder>
+                                <Label text=""/>
+                            </placeholder>
+                            <columns>
+                                <TableColumn fx:id="colCheckList" prefWidth="30.0" sortable="false">
+                                    <graphic>
+                                        <CheckBox fx:id="cbCheckList" onMouseClicked="#cbCheckListClick"/>
+                                    </graphic>
+                                </TableColumn>
+                                <TableColumn prefWidth="275.0" text="名称"/>
+                                <TableColumn prefWidth="105.0" text="修改日期"/>
+                                <TableColumn prefWidth="75.0" text="类型"/>
+                                <TableColumn prefWidth="75.0" text="大小"/>
+                            </columns>
+                            <contextMenu>
+                                <ContextMenu fx:id="cmFileTable">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="表格右键"/>
+                                    </items>
+                                </ContextMenu>
+                            </contextMenu>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </AnchorPane>

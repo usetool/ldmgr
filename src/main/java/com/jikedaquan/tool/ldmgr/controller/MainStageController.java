@@ -68,6 +68,7 @@ public class MainStageController implements Initializable {
             }
         });
         hyperlinkList.get(0).setVisited(true);
+        //点击第一个菜单
         openData(new Event(hyperlinkList.get(0), null, EventType.ROOT));
     }
 

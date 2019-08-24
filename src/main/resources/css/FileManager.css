@@ -1,0 +1,36 @@
+.split-pane{
+    -fx-background-insets: 0;
+    -fx-padding: 1 0 0 0;
+}
+.split-pane-divider{
+    -fx-padding: 0 1 0 0;
+}
+.table-view{
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+.table-cloumn{
+    -fx-alignment: left;
+}
+.tree-view{
+    -fx-background-insets: 0;
+    -fx-padding: 0 1;
+    -fx-border-width: 0;
+}
+.tree-cell{
+    /*-fx-pref-height: 30;*/
+    -fx-border-style: solid;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+}
+.tree-cell:hover{
+    -fx-background-color: #cce8ff;
+
+    -fx-border-color: rgb(153,209,255);
+}
+
+.tree-cell:focused{
+    -fx-background-color: rgba(190, 215, 238, 0.56);
+    -fx-text-fill: black;
+    -fx-border-color: rgb(153,209,255);
+}

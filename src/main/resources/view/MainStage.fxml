@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550" prefHeight="550" stylesheets="@/css/MainStage.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jikedaquan.tool.ldmgr.controller.MainStageController">
+<AnchorPane fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550" prefHeight="550" stylesheets="@/css/MainStage.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jikedaquan.tool.ldmgr.controller.MainStageController">
     <VBox fx:id="leftnav" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
 
         <VBox>
@@ -52,7 +52,7 @@
                 <Label fx:id="lblVideoTotalCount" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label text="音频资料：" GridPane.rowIndex="3" />
                 <Label fx:id="lblAudioTotalCount" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                
+
             </children>
             <VBox.margin>
                 <Insets top="200.0" />

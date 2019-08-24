@@ -29,12 +29,14 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <!--springboot对javafx的支持-->
         <dependency>
             <groupId>de.roskenet</groupId>
             <artifactId>springboot-javafx-support</artifactId>
             <version>2.1.6</version>
         </dependency>
 
+        <!--myBatisPlus-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -47,11 +49,26 @@
             <version>3.23.1</version>
         </dependency>
 
-        <dependency>
+        <!--bootstrap 风格(风格太少)-->
+        <!--<dependency>
             <groupId>org.kordamp.bootstrapfx</groupId>
             <artifactId>bootstrapfx-core</artifactId>
             <version>0.2.4</version>
             <scope>runtime</scope>
+        </dependency>-->
+
+        <!--使用本地jar-->
+        <!--<dependency>-->
+            <!--<groupId>org.xvolks</groupId>-->
+            <!--<artifactId>jnative</artifactId>-->
+            <!--<version>1.0.0-SNAPSHORT</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/src/main/resources/lib/jNative.jar</systemPath>-->
+        <!--</dependency>-->
+        <!--jna java native access-->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
         </dependency>
     </dependencies>
 

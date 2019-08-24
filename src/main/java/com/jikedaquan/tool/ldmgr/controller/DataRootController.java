@@ -199,7 +199,7 @@ public class DataRootController implements Initializable {
         Page<MyData> myDataPage = new Page<>(pageIndex, DEFAULT_PAGESIZE);
 
         myDataService.selectMyDataPage(myDataPage, queryMyData);
-
+        myDataObservableList.clear();
         myDataObservableList.addAll(myDataPage.getRecords());
         tableView.setItems(myDataObservableList);
 
