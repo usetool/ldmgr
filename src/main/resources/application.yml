@@ -7,6 +7,7 @@ spring:
 #    data: classpath:db/data-h2.sql
     url: jdbc:sqlite:data.db
 #    initialization-mode: always #springboot2开启
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

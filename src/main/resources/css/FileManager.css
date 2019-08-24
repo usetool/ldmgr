@@ -9,8 +9,9 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
-.table-cloumn{
-    -fx-alignment: left;
+.table-column{
+    -fx-text-origin: left;
+    -fx-text-alignment: left;
 }
 .tree-view{
     -fx-background-insets: 0;

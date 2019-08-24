@@ -26,7 +26,11 @@ import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Files;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -47,6 +51,8 @@ public class FileManagerController implements Initializable {
     private ContextMenu cmDisk;//显示磁盘和文件夹的右键菜单
     @FXML
     private TreeItem rootTreeItem;
+    @FXML
+    private TableView<DataFile> tableDataFile;
 
     private ObservableList<DataFile> dataFileObservableList = FXCollections.observableArrayList();
 
@@ -59,7 +65,7 @@ public class FileManagerController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                lock=true;
+                lock = true;
                 long startTime = System.currentTimeMillis();
                 File[] files = File.listRoots();
                 FileSystemView fileSystemView = FileSystemView.getFileSystemView();
@@ -70,7 +76,7 @@ public class FileManagerController implements Initializable {
                 }
                 long endTime = System.currentTimeMillis();
                 System.out.println("加载驱动耗时：" + (endTime - startTime));
-                lock=false;
+                lock = false;
             }
         }).start();
     }
@@ -88,19 +94,8 @@ public class FileManagerController implements Initializable {
         tvDisk.setShowRoot(false);
         tvDisk.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        tvDisk.setOnMouseClicked(event -> {
-            Node node = event.getPickResult().getIntersectedNode();
+        tableDataFile.setItems(dataFileObservableList);
 
-            if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)){
-                //得到选中的节点
-                ObservableList<TreeItem<FileInfo>> selectedItems = tvDisk.getSelectionModel().getSelectedItems();
-                TreeItem<FileInfo> fileInfoTreeItem = selectedItems.get(0);
-                if (fileInfoTreeItem.isExpanded()==false&&fileInfoTreeItem.getChildren().isEmpty()) {//没有展开状态并且没有子节点，也就是说再点一次就是展开
-                    //加载该节点对应子级目录
-                    loadSubDirAndFile(fileInfoTreeItem);
-                }
-            }
-        });
 
         loadDisk();
         colCheckList.setCellValueFactory(param -> {
@@ -122,27 +117,63 @@ public class FileManagerController implements Initializable {
             });
             return observableValue;
         });
+        tvDisk.setOnMouseClicked(event -> {
+            Node node = event.getPickResult().getIntersectedNode();
+
+            if (node instanceof Text || (node instanceof TreeCell && ((TreeCell) node).getText() != null)) {
+                //得到选中的节点
+                ObservableList<TreeItem<FileInfo>> selectedItems = tvDisk.getSelectionModel().getSelectedItems();
+                TreeItem<FileInfo> fileInfoTreeItem = selectedItems.get(0);
+                if (fileInfoTreeItem.isExpanded() == false && fileInfoTreeItem.getChildren().isEmpty()) {//没有展开状态并且没有子节点，也就是说再点一次就是展开
+                    //加载该节点对应子级目录
+                    loadSubDirAndFile(fileInfoTreeItem);
+                }
+            }
+        });
     }
 
     /**
      * 加载该节点对应的子级目录和文件，只加载目录到子节点，没有子目录不加载，将文件加载到表格中
+     *
      * @param fileInfoTreeItem
      */
     private void loadSubDirAndFile(TreeItem<FileInfo> fileInfoTreeItem) {
-        File file = fileInfoTreeItem.getValue().getFile();
+        File currentFile = fileInfoTreeItem.getValue().getFile();
 
+        //清空
         fileInfoTreeItem.getChildren().clear();
+        dataFileObservableList.clear();
+
+        if (currentFile.listFiles() == null) {
+            return;
+        }
+
         for (File subFile :
-                file.listFiles()) {
-            if (subFile.isDirectory()){
-                FileInfo fileInfo = new FileInfo(subFile.getName(),subFile);
+                currentFile.listFiles()) {
+            if (subFile.isDirectory() && (!subFile.isHidden())) {
+
+                FileInfo fileInfo = new FileInfo(subFile.getName(), subFile);
                 TreeItem<FileInfo> treeItem = new TreeItem<>(fileInfo);
                 fileInfoTreeItem.getChildren().add(treeItem);
-            }else if (file.isFile()){
+            } else if (subFile.isFile() && (!subFile.isHidden())) {
                 //TODO 加载文件到表格中
+                DataFile dataFile = new DataFile();
+                dataFile.setFileName(subFile.getName());
+                dataFile.setFileSize(subFile.length() + "");
+                dataFile.setFileType("随便");
+                try {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/M/d HH:mm");
+                    Date date = new Date(subFile.lastModified());
+                    dataFile.setUpdateDateTime(simpleDateFormat.format(date));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                dataFileObservableList.add(dataFile);
             }
         }
         fileInfoTreeItem.setExpanded(true);
+
     }
 
     /**
@@ -152,7 +183,7 @@ public class FileManagerController implements Initializable {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (lock){
+                while (lock) {
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -165,7 +196,7 @@ public class FileManagerController implements Initializable {
                 for (int i = 0; i < localDisks.size(); i++) {
                     String showName = localDisks.get(i);
                     File file = files[i];
-                    FileInfo fileInfo = new FileInfo(showName,file);
+                    FileInfo fileInfo = new FileInfo(showName, file);
                     TreeItem<FileInfo> treeItem = new TreeItem<>(fileInfo);
 
                     tvDisk.getRoot().getChildren().add(treeItem);
@@ -176,6 +207,7 @@ public class FileManagerController implements Initializable {
 
     /**
      * 表格表头复选框点击事件
+     *
      * @param mouseEvent
      */
     public void cbCheckListClick(MouseEvent mouseEvent) {

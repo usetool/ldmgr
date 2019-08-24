@@ -12,6 +12,7 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TreeItem?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <AnchorPane stylesheets="@/css/FileManager.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
             AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -51,7 +52,7 @@
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <TableView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                        <TableView fx:id="tableDataFile" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <placeholder>
                                 <Label text=""/>
@@ -62,10 +63,26 @@
                                         <CheckBox fx:id="cbCheckList" onMouseClicked="#cbCheckListClick"/>
                                     </graphic>
                                 </TableColumn>
-                                <TableColumn prefWidth="275.0" text="名称"/>
-                                <TableColumn prefWidth="105.0" text="修改日期"/>
-                                <TableColumn prefWidth="75.0" text="类型"/>
-                                <TableColumn prefWidth="75.0" text="大小"/>
+                                <TableColumn prefWidth="275.0" text="名称">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="fileName"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="120.0" text="修改日期">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="updateDateTime"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="75.0" text="类型">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="fileType"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="75.0" text="大小">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="fileSize"/>
+                                    </cellValueFactory>
+                                </TableColumn>
                             </columns>
                             <contextMenu>
                                 <ContextMenu fx:id="cmFileTable">
