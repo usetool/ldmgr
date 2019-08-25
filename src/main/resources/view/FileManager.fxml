@@ -71,7 +71,7 @@
                                         <PropertyValueFactory property="fileType" />
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn prefWidth="75.0" text="大小">
+                                <TableColumn fx:id="colFileSize" prefWidth="75.0" text="大小">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="fileSize" />
                                     </cellValueFactory>

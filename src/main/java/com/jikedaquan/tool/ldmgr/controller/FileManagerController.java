@@ -1,5 +1,6 @@
 package com.jikedaquan.tool.ldmgr.controller;
 
+import com.jikedaquan.tool.ldmgr.util.ByteUtil;
 import com.jikedaquan.tool.ldmgr.vo.DataFile;
 import com.jikedaquan.tool.ldmgr.vo.FileInfo;
 import de.felixroske.jfxsupport.FXMLController;
@@ -26,13 +27,11 @@ import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Files;
+import java.text.Collator;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 @FXMLController
 public class FileManagerController implements Initializable {
@@ -53,6 +52,19 @@ public class FileManagerController implements Initializable {
     private TreeItem rootTreeItem;
     @FXML
     private TableView<DataFile> tableDataFile;
+    @FXML
+    private TableColumn<DataFile, CheckBox> colFileSize;
+
+    //自定义整数比较器，用于比较自定的字节大小文字版
+    public static final Comparator BYTETEXT_COMPARATOR = (obj1, obj2) -> {
+        if (obj1 == null && obj2 == null) return 0;
+        if (obj1 == null) return -1;
+        if (obj2 == null) return 1;
+        //将字符串转数字
+        obj1 = String.format("%d",Integer.valueOf(obj1.toString().replaceAll(" KB","").replace(",","")));
+        obj2 = String.format("%d",Integer.valueOf(obj2.toString().replaceAll(" KB","").replace(",","")));
+        return Integer.compare(Integer.parseInt(obj1.toString()), Integer.parseInt(obj2.toString()));
+    };
 
     private ObservableList<DataFile> dataFileObservableList = FXCollections.observableArrayList();
 
@@ -156,10 +168,11 @@ public class FileManagerController implements Initializable {
                 TreeItem<FileInfo> treeItem = new TreeItem<>(fileInfo);
                 fileInfoTreeItem.getChildren().add(treeItem);
             } else if (subFile.isFile() && (!subFile.isHidden())) {
-                //TODO 加载文件到表格中
                 DataFile dataFile = new DataFile();
                 dataFile.setFileName(subFile.getName());
-                dataFile.setFileSize(subFile.length() + "");
+                //向上取整，模仿微软资源管理器  wtm 按纯字符串排序，还得改成按值排序
+                dataFile.setFileSize(String.format("%,d",(int)Math.ceil(Math.ceil(subFile.length()/ (double)ByteUtil.SIZE_KB))) + " KB");
+                colFileSize.setComparator(BYTETEXT_COMPARATOR);
                 dataFile.setFileType("随便");
                 try {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/M/d HH:mm");
