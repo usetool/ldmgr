@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550" prefHeight="550" stylesheets="@/css/MainStage.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jikedaquan.tool.ldmgr.controller.MainStageController">
+<AnchorPane fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="1366" prefHeight="768" stylesheets="@/css/MainStage.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jikedaquan.tool.ldmgr.controller.MainStageController">
     <VBox fx:id="leftnav" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
 
         <VBox>

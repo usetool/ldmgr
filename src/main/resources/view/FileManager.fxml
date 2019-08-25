@@ -7,22 +7,17 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TreeItem?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<AnchorPane stylesheets="@/css/FileManager.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jikedaquan.tool.ldmgr.controller.FileManagerController">
+<AnchorPane stylesheets="@/css/FileManager.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jikedaquan.tool.ldmgr.controller.FileManagerController">
     <children>
-        <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="300.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
                         <!--<ListView fx:id="lvDisk" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">-->
 
@@ -35,59 +30,57 @@
                         <!--</contextMenu>-->
                         <!--</ListView>-->
 
-                        <TreeView fx:id="tvDisk" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TreeView fx:id="tvDisk" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <root>
-                                <TreeItem fx:id="rootTreeItem"/>
+                                <TreeItem fx:id="rootTreeItem" />
                             </root>
                             <contextMenu>
                                 <ContextMenu fx:id="cmDisk">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Unspecified Action"/>
+                                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
                                     </items>
                                 </ContextMenu>
                             </contextMenu>
                         </TreeView>
                     </children>
                 </AnchorPane>
-                <AnchorPane>
+                <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
                     <children>
-                        <TableView fx:id="tableDataFile" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tableDataFile" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <placeholder>
-                                <Label text=""/>
+                                <Label text="" />
                             </placeholder>
                             <columns>
                                 <TableColumn fx:id="colCheckList" prefWidth="30.0" sortable="false">
                                     <graphic>
-                                        <CheckBox fx:id="cbCheckList" onMouseClicked="#cbCheckListClick"/>
+                                        <CheckBox fx:id="cbCheckList" onMouseClicked="#cbCheckListClick" />
                                     </graphic>
                                 </TableColumn>
                                 <TableColumn prefWidth="275.0" text="名称">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="fileName"/>
+                                        <PropertyValueFactory property="fileName" />
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn prefWidth="120.0" text="修改日期">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="updateDateTime"/>
+                                        <PropertyValueFactory property="updateDateTime" />
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn prefWidth="75.0" text="类型">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="fileType"/>
+                                        <PropertyValueFactory property="fileType" />
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn prefWidth="75.0" text="大小">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="fileSize"/>
+                                        <PropertyValueFactory property="fileSize" />
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>
                             <contextMenu>
                                 <ContextMenu fx:id="cmFileTable">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="表格右键"/>
+                                        <MenuItem mnemonicParsing="false" text="表格右键" />
                                     </items>
                                 </ContextMenu>
                             </contextMenu>
