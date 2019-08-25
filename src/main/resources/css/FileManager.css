@@ -26,7 +26,6 @@
 }
 .tree-cell:hover{
     -fx-background-color: #cce8ff;
-
     -fx-border-color: rgb(153,209,255);
 }
 
@@ -34,4 +33,14 @@
     -fx-background-color: rgba(190, 215, 238, 0.56);
     -fx-text-fill: black;
     -fx-border-color: rgb(153,209,255);
+}
+
+.context-menu {
+    -fx-background-color: rgba(40, 43, 48, 1);
+    -fx-background-insets: 0;
+    -fx-padding: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: rgba(245, 245, 245, 0.1);
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.6) , 6, 0.0 , 0 , 0);
 }

@@ -66,10 +66,10 @@
             <!--<systemPath>${project.basedir}/src/main/resources/lib/jNative.jar</systemPath>-->
         <!--</dependency>-->
         <!--jna java native access-->
-        <dependency>
+        <!--<dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 

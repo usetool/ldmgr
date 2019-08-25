@@ -36,6 +36,7 @@ import java.util.*;
 @FXMLController
 public class FileManagerController implements Initializable {
 
+
     @FXML
     private TableColumn<DataFile, CheckBox> colCheckList;
     @FXML
@@ -44,10 +45,10 @@ public class FileManagerController implements Initializable {
     private TreeView<FileInfo> tvDisk;//显示磁盘和文件夹
     @FXML
     private ListView lvDisk;//显示磁盘
-    @FXML
-    private ContextMenu cmFileTable;//展示文件表格的右键菜单
-    @FXML
-    private ContextMenu cmDisk;//显示磁盘和文件夹的右键菜单
+    //    @FXML
+//    private ContextMenu cmFileTable;//展示文件表格的右键菜单
+//    @FXML
+//    private ContextMenu cmDisk;//显示磁盘和文件夹的右键菜单
     @FXML
     private TreeItem rootTreeItem;
     @FXML
@@ -61,8 +62,8 @@ public class FileManagerController implements Initializable {
         if (obj1 == null) return -1;
         if (obj2 == null) return 1;
         //将字符串转数字
-        obj1 = String.format("%d",Integer.valueOf(obj1.toString().replaceAll(" KB","").replace(",","")));
-        obj2 = String.format("%d",Integer.valueOf(obj2.toString().replaceAll(" KB","").replace(",","")));
+        obj1 = String.format("%d", Integer.valueOf(obj1.toString().replaceAll(" KB", "").replace(",", "")));
+        obj2 = String.format("%d", Integer.valueOf(obj2.toString().replaceAll(" KB", "").replace(",", "")));
         return Integer.compare(Integer.parseInt(obj1.toString()), Integer.parseInt(obj2.toString()));
     };
 
@@ -70,6 +71,7 @@ public class FileManagerController implements Initializable {
 
     static List<String> localDisks = new ArrayList<>();
     static boolean lock = false;
+
 
     //TODO 以直接访问本地接口方式以优化加载速度
     //静态方式加载，以便快速获取本地磁盘
@@ -99,7 +101,6 @@ public class FileManagerController implements Initializable {
 
         rootTreeItem.setExpanded(true);
 
-//        tvDisk.setRoot(rootTreeItem); //root is treeItem
         TreeCell<FileInfo> treeCell = new TreeCell<>();
         treeCell.updateTreeItem(rootTreeItem);
         tvDisk.setRoot(rootTreeItem);
@@ -129,6 +130,7 @@ public class FileManagerController implements Initializable {
             });
             return observableValue;
         });
+
         tvDisk.setOnMouseClicked(event -> {
             Node node = event.getPickResult().getIntersectedNode();
 
@@ -170,9 +172,10 @@ public class FileManagerController implements Initializable {
             } else if (subFile.isFile() && (!subFile.isHidden())) {
                 DataFile dataFile = new DataFile();
                 dataFile.setFileName(subFile.getName());
-                //向上取整，模仿微软资源管理器  wtm 按纯字符串排序，还得改成按值排序
-                dataFile.setFileSize(String.format("%,d",(int)Math.ceil(Math.ceil(subFile.length()/ (double)ByteUtil.SIZE_KB))) + " KB");
+                //向上取整，模仿微软资源管理器
+                dataFile.setFileSize(String.format("%,d", (int) Math.ceil(Math.ceil(subFile.length() / (double) ByteUtil.SIZE_KB))) + " KB");
                 colFileSize.setComparator(BYTETEXT_COMPARATOR);
+                //TODO 常用文件类型识别
                 dataFile.setFileType("随便");
                 try {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/M/d HH:mm");

@@ -15,6 +15,7 @@
     -fx-border-style: solid;
     -fx-background-color: rgb(222, 222, 222);
 }
+
 #leftnav .hyperlink {
     -fx-border-width: 0 0 0 5;
     -fx-border-color: transparent;
@@ -28,12 +29,45 @@
 
 }
 
-#dataGridPane{
+#dataGridPane {
     -fx-border-width: 1 0;
     -fx-border-style: solid;
     -fx-border-color: gray;
     -fx-pref-width: 170;
- }
-#rootAnchorPane{
+}
 
+/**
+右键菜单的样式必须放在顶级窗口
+ */
+.context-menu .menu-item {
+    -fx-background-color: transparent;
+    /*-fx-padding: 0.333333em 0.41777em 0.333333em 0.41777em;  !* 4 5 4 5 *!*/
+    -fx-padding: 4 5 4 35;  /* 4 5 4 5 */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10 4;/*x y*/
+}
+
+.context-menu {
+    -fx-pref-width: 260;
+    -fx-background-color: rgb(238, 238, 238);
+}
+
+.context-menu .menu-item .label {
+    -fx-text-fill: black;
+}
+
+.context-menu .menu-item:hover .label {
+    -fx-text-fill: black;
+}
+
+.context-menu .menu-item:hover {
+    -fx-background-color: white;
+}
+
+#checkRepeatFile {
+    -fx-background-image: url("/icons/check_repeat_16.png");
+}
+
+#addToDataBase {
+    -fx-background-image: url("/icons/add_16.png");
 }

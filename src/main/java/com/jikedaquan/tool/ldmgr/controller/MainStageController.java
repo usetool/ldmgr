@@ -6,9 +6,6 @@ import com.jikedaquan.tool.ldmgr.util.Constants;
 import com.jikedaquan.tool.ldmgr.view.DataRootView;
 import com.jikedaquan.tool.ldmgr.view.FileManagerView;
 import de.felixroske.jfxsupport.FXMLController;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -90,6 +87,10 @@ public class MainStageController implements Initializable {
 
     }
 
+    /**
+     * 打开首页资料数据
+     * @param event
+     */
     public void openData(Event event) {
         Hyperlink source = (Hyperlink) event.getSource();
         changeHyperLinkActive(source);
@@ -104,6 +105,10 @@ public class MainStageController implements Initializable {
         changeHyperLinkActive(source);
     }
 
+    /**
+     * 打开文件管理器
+     * @param event
+     */
     public void openFilemgr(Event event) {
         Hyperlink source = (Hyperlink) event.getSource();
         changeHyperLinkActive(source);
