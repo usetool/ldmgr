@@ -1,3 +1,9 @@
+# 零、技术架构
+jdk1.8 SpringBoot2.1.6+javafx
+
+springboot-javafx-support 使SpringBoot支持了javafx，数据库使用sqlite，
+数据访问层采用 MyBatisPlus,lombok简化实体类。
+
 
 # 一、介绍
 
