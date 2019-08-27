@@ -84,7 +84,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <configuration>
                     <!--入口类-->
-                    <mainClass>com.jikedaquan.tool.ldmgr.DatamanagerApplication</mainClass>
+                    <mainClass>com.jikedaquan.tool.ldmgr.MainApplication</mainClass>
                     <vendor>jikedaquan</vendor>
                 </configuration>
             </plugin>

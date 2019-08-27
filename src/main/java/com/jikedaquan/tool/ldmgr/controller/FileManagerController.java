@@ -1,6 +1,8 @@
 package com.jikedaquan.tool.ldmgr.controller;
 
+import com.jikedaquan.tool.ldmgr.MainApplication;
 import com.jikedaquan.tool.ldmgr.util.ByteUtil;
+import com.jikedaquan.tool.ldmgr.view.AddToDataBaseView;
 import com.jikedaquan.tool.ldmgr.vo.DataFile;
 import com.jikedaquan.tool.ldmgr.vo.FileInfo;
 import de.felixroske.jfxsupport.FXMLController;
@@ -9,6 +11,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swt.FXCanvas;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +23,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.util.Callback;
 
 import javax.swing.*;
@@ -45,16 +49,24 @@ public class FileManagerController implements Initializable {
     private TreeView<FileInfo> tvDisk;//显示磁盘和文件夹
     @FXML
     private ListView lvDisk;//显示磁盘
-    //    @FXML
-//    private ContextMenu cmFileTable;//展示文件表格的右键菜单
-//    @FXML
-//    private ContextMenu cmDisk;//显示磁盘和文件夹的右键菜单
+
     @FXML
     private TreeItem rootTreeItem;
     @FXML
     private TableView<DataFile> tableDataFile;
     @FXML
     private TableColumn<DataFile, CheckBox> colFileSize;
+
+    //===一大波右键菜单来袭===
+    @FXML
+    private ContextMenu cmFileTable;//展示文件表格的右键菜单
+    @FXML
+    private ContextMenu cmDisk;//显示磁盘和文件夹的右键菜单
+    @FXML
+    private MenuItem checkRepeatFile;//检查重复文件
+    @FXML
+    private MenuItem addToDataBase;//添加文件夹到数据库
+
 
     //自定义整数比较器，用于比较自定的字节大小文字版
     public static final Comparator BYTETEXT_COMPARATOR = (obj1, obj2) -> {
@@ -97,7 +109,6 @@ public class FileManagerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
 
         rootTreeItem.setExpanded(true);
 
@@ -238,5 +249,16 @@ public class FileManagerController implements Initializable {
                 dataFile.getCheckBox().getValue().setSelected(false);
             });
         }
+    }
+
+    /**
+     * 添加到资料库菜单点击
+     * @param actionEvent
+     */
+    public void addToDataBaseClick(ActionEvent actionEvent) {
+        //检查是否选中了一个合法的节点
+        //获取此节点的路径及文件
+        //传递参数到另一个窗口
+        MainApplication.showView(AddToDataBaseView.class, Modality.APPLICATION_MODAL);//打开一个模态窗口
     }
 }

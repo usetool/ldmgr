@@ -10,32 +10,26 @@
 <?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane stylesheets="@/css/FileManager.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.jikedaquan.tool.ldmgr.controller.FileManagerController">
+<AnchorPane stylesheets="@/css/FileManager.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jikedaquan.tool.ldmgr.controller.FileManagerController">
+
     <children>
-        <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.3" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
             <items>
                 <AnchorPane maxWidth="300.0" minHeight="0.0" minWidth="300.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
 
-                        <TreeView fx:id="tvDisk" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TreeView fx:id="tvDisk" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <root>
-                                <TreeItem fx:id="rootTreeItem"/>
+                                <TreeItem fx:id="rootTreeItem" />
                             </root>
                             <contextMenu>
                                 <ContextMenu fx:id="cmDisk">
                                     <items>
-                                        <MenuItem fx:id="checkRepeatFile" text="检查重复文件"/>
-                                        <MenuItem fx:id="addToDataBase" text="添加到资料库"/>
+                                        <MenuItem fx:id="checkRepeatFile" text="检查重复文件" />
+                                        <MenuItem fx:id="addToDataBase" onAction="#addToDataBaseClick" text="添加到资料库" />
                                     </items>
                                 </ContextMenu>
                             </contextMenu>
@@ -44,42 +38,50 @@
                 </AnchorPane>
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
                     <children>
-                        <TableView fx:id="tableDataFile" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="tableDataFile" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <placeholder>
-                                <Label text=""/>
+                                <Label text="该选中目录没有文件" />
                             </placeholder>
                             <columns>
-                                <TableColumn fx:id="colCheckList" prefWidth="30.0" sortable="false">
+                                <TableColumn fx:id="colCheckList" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" sortable="false">
+                                    <style>
+                                        -fx-alignment: CENTER;
+                                    </style>
                                     <graphic>
-                                        <CheckBox fx:id="cbCheckList" onMouseClicked="#cbCheckListClick"/>
+                                        <CheckBox fx:id="cbCheckList" mnemonicParsing="false" onMouseClicked="#cbCheckListClick" />
                                     </graphic>
                                 </TableColumn>
                                 <TableColumn prefWidth="275.0" text="名称">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="fileName"/>
+                                        <PropertyValueFactory property="fileName" />
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn prefWidth="120.0" text="修改日期">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="updateDateTime"/>
+                                        <PropertyValueFactory property="updateDateTime" />
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn prefWidth="75.0" text="类型">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="fileType"/>
+                                        <PropertyValueFactory property="fileType" />
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn fx:id="colFileSize" prefWidth="75.0" text="大小">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="fileSize"/>
+                                        <PropertyValueFactory property="fileSize" />
                                     </cellValueFactory>
                                 </TableColumn>
                             </columns>
                             <contextMenu>
                                 <ContextMenu fx:id="cmFileTable">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="表格右键"/>
+                                        <MenuItem fx:id="miOpenFile" mnemonicParsing="false" text="打开文件(双击整行也可以)"/>
+                                        <MenuItem fx:id="miAddToDataBase" mnemonicParsing="false" text="添加到资料库" />
+                                        <MenuItem fx:id="miCopy" mnemonicParsing="false" text="复制" />
+                                        <MenuItem fx:id="miPaste" mnemonicParsing="false" text="粘贴" />
+                                        <MenuItem fx:id="miCut" mnemonicParsing="false" text="剪切" />
+                                        <MenuItem fx:id="miProperty" mnemonicParsing="false" text="属性" />
+                                        <MenuItem fx:id="miDeleteFile" mnemonicParsing="false" text="删除(永久从磁盘中消失)" />
                                     </items>
                                 </ContextMenu>
                             </contextMenu>

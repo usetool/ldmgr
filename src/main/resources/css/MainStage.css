@@ -64,10 +64,34 @@
     -fx-background-color: white;
 }
 
+/*
+右键菜单图标
+*/
 #checkRepeatFile {
     -fx-background-image: url("/icons/check_repeat_16.png");
 }
 
 #addToDataBase {
     -fx-background-image: url("/icons/add_16.png");
+}
+#miOpenFile{
+    -fx-background-image: url("/icons/openFile_16.png");
+}
+#miAddToDataBase{
+    -fx-background-image: url("/icons/add_16.png");
+}
+#miCopy{
+    -fx-background-image: url("/icons/copyFile_16.png");
+}
+#miPaste{
+    -fx-background-image: url("/icons/paste_16.png");
+}
+#miCut{
+    -fx-background-image: url("/icons/cut_16.png");
+}
+#miProperty{
+    -fx-background-image: url("/icons/property_16.png");
+}
+#miDeleteFile{
+    -fx-background-image: url("/icons/delete_16.png");
 }

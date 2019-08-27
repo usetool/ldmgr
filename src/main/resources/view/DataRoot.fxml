@@ -38,7 +38,7 @@
             <TableView fx:id="tableView" minWidth="-Infinity" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
                 <columns>
-                    <TableColumn fx:id="column_checkBox" prefWidth="35.0" sortable="false">
+                    <TableColumn fx:id="column_checkBox" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" sortable="false">
                         <graphic>
                             <CheckBox fx:id="column_checkBox_cell" mnemonicParsing="false" onMouseClicked="#selectAllRow" />
                         </graphic>

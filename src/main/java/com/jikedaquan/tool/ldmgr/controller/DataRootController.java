@@ -77,9 +77,6 @@ public class DataRootController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
-        //绑定列对应的数据，列头加复选框
-//        dataId.setCellValueFactory(new PropertyValueFactory<>("dataId"));
         //设定单元格中复选框的选中
         column_checkBox.setCellValueFactory(param -> {
             ObservableValue<CheckBox> checkBox = param.getValue().getCheckBox();
