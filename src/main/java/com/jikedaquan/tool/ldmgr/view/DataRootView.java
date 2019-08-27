@@ -6,8 +6,6 @@ import de.felixroske.jfxsupport.FXMLView;
 @FXMLView(value = "/view/DataRoot.fxml")
 public class DataRootView extends AbstractFxmlView {
 
-
-
     public DataRootView(){
 
     }
