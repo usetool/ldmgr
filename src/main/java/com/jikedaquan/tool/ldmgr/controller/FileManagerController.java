@@ -2,6 +2,7 @@ package com.jikedaquan.tool.ldmgr.controller;
 
 import com.jikedaquan.tool.ldmgr.MainApplication;
 import com.jikedaquan.tool.ldmgr.util.ByteUtil;
+import com.jikedaquan.tool.ldmgr.util.WindowUtil;
 import com.jikedaquan.tool.ldmgr.view.AddToDataBaseView;
 import com.jikedaquan.tool.ldmgr.vo.DataFile;
 import com.jikedaquan.tool.ldmgr.vo.FileInfo;
@@ -10,36 +11,27 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swt.FXCanvas;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.util.Callback;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Files;
-import java.text.Collator;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 @FXMLController
 public class FileManagerController implements Initializable {
 
+    @Autowired
+    private WindowUtil windowUtil;
 
     @FXML
     private TableColumn<DataFile, CheckBox> colCheckList;
@@ -258,7 +250,7 @@ public class FileManagerController implements Initializable {
     public void addToDataBaseClick(ActionEvent actionEvent) {
         //检查是否选中了一个合法的节点
         //获取此节点的路径及文件
-        //传递参数到另一个窗口
-        MainApplication.showView(AddToDataBaseView.class, Modality.APPLICATION_MODAL);//打开一个模态窗口
+        //传递参数到另一个窗口//打开一个模态窗口
+        windowUtil.getController(AddToDataBaseView.class,AddToDataBaseViewController.class,Modality.APPLICATION_MODAL,"测试窗体");
     }
 }
